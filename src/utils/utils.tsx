@@ -34,3 +34,17 @@ export function luhnValidation(card: string): boolean {
   const sum = digits.reduce((acc, current) => acc + current, 0);
   return sum % 10 === 0;
 }
+
+/**
+ * 
+ * @param amount 
+ * @returns 
+ */
+export function formatCurrency(amount: string | number): string | undefined {
+  if(!amount) return undefined
+  const currencyCol = amount.toLocaleString("en-US", {
+    currency: "USD",
+    style: "currency",
+  });
+  return currencyCol;
+}
