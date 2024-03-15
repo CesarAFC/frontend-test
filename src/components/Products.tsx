@@ -9,7 +9,7 @@ function Products({}: AgregarProps) {
 
   return (
     <>
-      <section className="flex gap-2">
+      <section className="flex flex-wrap gap-2">
         {products.map((item) => (
           <ProductCard
             key={item.id}
@@ -22,7 +22,7 @@ function Products({}: AgregarProps) {
       </section>
       <div className="my-4">
         <h4 className="text-xl font-bold">Cart</h4>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {state.cart.map((item) => (
             <ProductCard
               key={item.id}
@@ -31,7 +31,7 @@ function Products({}: AgregarProps) {
               price={item.price}
               description={item.description}
               qty={item.quantity}
-              isCart={false}
+              isInCart={true}
             />
           ))}
         </div>
