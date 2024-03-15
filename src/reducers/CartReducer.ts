@@ -1,17 +1,17 @@
-import { addToCartAction } from "../actions";
-import { ADD_TO_CART } from "../types";
+import { TaddToCartAction, TdeleteFromCart } from "../actions";
+import { ADD_TO_CART, REMOVE_ONE_FROM_CART } from "../types";
 import { Product } from "../types/store.types";
-import {Reducer} from 'redux'
+import { Reducer } from "redux";
 
 interface Cart extends Product {
-  quantity: number
+  quantity: number;
 }
 type InitialState = {
-  products: Product[]
-  cart: Cart[]
-}
+  products: Product[];
+  cart: Cart[];
+};
 
-type CartActions = addToCartAction
+type CartActions = TaddToCartAction | TdeleteFromCart;
 
 const initialState: InitialState = {
   products: [
@@ -73,25 +73,51 @@ const initialState: InitialState = {
   cart: [],
 };
 
-export const cartReducer: Reducer<InitialState, CartActions> = (state = initialState, action) => {
-    switch (action.type) {
-        case ADD_TO_CART: {
-          let newItem = state.products.find(
-            (product) => product.id === action.payload
-          );
-          let itemInCart = state.cart.find( item => item.id === newItem?.id);
+export const cartReducer: Reducer<InitialState, CartActions> = (
+  state = initialState,
+  action
+) => {
+  switch (action.type) {
+    case ADD_TO_CART: {
+      let newItem = state.products.find(
+        (product) => product.id === action.payload
+      );
+      let itemInCart = state.cart.find((item) => item.id === newItem?.id);
 
-          return itemInCart ? { 
-            ...state, 
-            cart: state.cart.map(item => item.id === newItem?.id ? {...item, quantity: item.quantity+1} : item),
-        } : { 
-            ...state, 
-            cart: [...state.cart, {...newItem as Product, quantity: 1}],
-        };
-        }
-
-        default:
-            // throw Error('Unknown action: ' + action.type);
-            return state;
+      return itemInCart
+        ? {
+            ...state,
+            cart: state.cart.map((item) =>
+              item.id === newItem?.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            ),
+          }
+        : {
+            ...state,
+            cart: [...state.cart, { ...(newItem as Product), quantity: 1 }],
+          };
     }
-}
+
+    case REMOVE_ONE_FROM_CART: {
+      let itemToDelete = state.cart.find((i) => i.id === action.payload) as Cart
+
+      return itemToDelete.quantity > 1
+        ? {
+            ...state,
+            cart: state.cart.map((item) =>
+              item.id === action.payload
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            ),
+          }
+        : {
+            ...state,
+            cart: state.cart.filter((item) => item.id !== action.payload),
+          };
+    }
+
+    default:
+      return state;
+  }
+};
