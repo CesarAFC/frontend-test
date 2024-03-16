@@ -3,7 +3,9 @@ import Label from "./Label";
 import { useState } from "react";
 import { CardFormatter, luhnValidation } from "../utils/utils";
 
-type CreditCardInputProps = {};
+type CreditCardInputProps = {
+  setIsCardValid: (event: boolean) => void
+};
 
 const IssuerNumbers: Record<string, any> = {
   "3": <FaCcAmex />,
@@ -11,13 +13,14 @@ const IssuerNumbers: Record<string, any> = {
   "5": <FaCcMastercard />,
 };
 
-function CreditCardInput({}: CreditCardInputProps) {
+function CreditCardInput({setIsCardValid}: CreditCardInputProps) {
   const [cardNumber, setCardNumber] = useState<string>("");
 
   const handleCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
     const card = event.target.value;
     setCardNumber(card.trim());
-    issuerValidation(card);
+    const isValidCard = luhnValidation(card.trim())
+    setIsCardValid(isValidCard)
   };
 
   const issuerValidation = (card: string) => {
@@ -25,10 +28,9 @@ function CreditCardInput({}: CreditCardInputProps) {
     return IssuerNumbers[identificationNumber] || undefined;
   };
   return (
-    <>
+    <div>
       <Label htmlFor="name">Card number</Label>
-
-      <div className="flex items-center gap-2 px-2 rounded focus-within:outline">
+      <div className="flex items-center gap-2 px-2 border border-slate-300 rounded focus-within:outline focus-within:outline-slate-500">
         <span>{issuerValidation(cardNumber)}</span>
         <input
           className="p-2 rounded outline-none"
@@ -38,12 +40,11 @@ function CreditCardInput({}: CreditCardInputProps) {
           value={CardFormatter(cardNumber)}
           onChange={handleCardNumber}
           name="card"
+          minLength={19}
           maxLength={19}
         />
       </div>
-
-      <p>Card is: {luhnValidation(cardNumber) ? "valid" : "invalid"}</p>
-    </>
+    </div>
   );
 }
 
