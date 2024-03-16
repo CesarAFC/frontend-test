@@ -20,6 +20,7 @@ specifiers:
   react-icons: ^5.0.1
   react-redux: ^9.1.0
   redux: ^5.0.1
+  redux-persist: ^6.0.0
   tailwindcss: ^3.4.1
   typescript: ^5.2.2
   vite: ^5.1.6
@@ -34,6 +35,7 @@ dependencies:
   react-icons: 5.0.1_react@18.2.0
   react-redux: 9.1.0_p2vdfovekgjskvrvonxksgwwum
   redux: 5.0.1
+  redux-persist: 6.0.0_react@18.2.0+redux@5.0.1
 
 devDependencies:
   '@types/react': 18.2.65
@@ -2483,6 +2485,19 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
+
+  /redux-persist/6.0.0_react@18.2.0+redux@5.0.1:
+    resolution: {integrity: sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==}
+    peerDependencies:
+      react: '>=16'
+      redux: '>4.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      redux: 5.0.1
+    dev: false
 
   /redux/5.0.1:
     resolution: {integrity: sha512-M9/ELqF6fy8FwmkpnF0S3YKOqMyoWJ4+CS5Efg2ct3oY9daQvd/Pc71FpGZsVsbl3Cpb+IIcjBDUnnyBdQbq4w==}
