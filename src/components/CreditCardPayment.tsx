@@ -6,24 +6,34 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import AddToCartButton from "./PayWithCreditCardButton";
+import PrimaryButton from "./PrimaryButton";
 import CreditCardInfo from "./CreditCardInfo";
 import CreditCardInput from "./CreditCardInput";
-import toast, { Toaster } from "react-hot-toast";
-import { addToCart, newCardInfo } from "../actions";
+import toast from "react-hot-toast";
+import {
+  addToCart,
+  newCardInfo,
+  toggleCartDrawer,
+  togglePaymentModal,
+} from "../actions";
 import { CardInformation } from "../types/store.types";
+import SwipeableEdgeDrawer from "./CartDrawer";
+import { useTypedShoppingSelector } from "../hooks/useTypedSelector";
+import { CiCreditCard1 } from "react-icons/ci";
 
 export default function CreditCardPayment({ id }: { id: string }) {
-  const [open, setOpen] = useState(false);
+  const { isModalPaymentOpen } = useTypedShoppingSelector();
   const [isCardValid, setIsCardValid] = useState(false);
+
   const dispatch = useDispatch();
+  togglePaymentModal;
 
   const handleClickOpen = () => {
-    setOpen(true);
+    dispatch(togglePaymentModal(true));
   };
 
   const handleClose = () => {
-    setOpen(false);
+    dispatch(togglePaymentModal(false));
   };
 
   const handleValidCard = useCallback((event: boolean) => {
@@ -39,6 +49,7 @@ export default function CreditCardPayment({ id }: { id: string }) {
     if (isCardValid) {
       dispatch(newCardInfo(formJson));
       dispatch(addToCart(id));
+      dispatch(toggleCartDrawer(true));
       handleClose();
     } else {
       toast.error("Credit card not valid");
@@ -46,10 +57,13 @@ export default function CreditCardPayment({ id }: { id: string }) {
   };
   return (
     <>
-      <AddToCartButton onClick={handleClickOpen} />
+      <PrimaryButton onClick={handleClickOpen}>
+        <CiCreditCard1 />
+        <span>Pay with credit card</span>
+      </PrimaryButton>
       <Dialog
         fullWidth
-        open={open}
+        open={isModalPaymentOpen}
         onClose={handleClose}
         PaperProps={{
           component: "form",
@@ -70,7 +84,7 @@ export default function CreditCardPayment({ id }: { id: string }) {
           <Button type="submit">Add</Button>
         </DialogActions>
       </Dialog>
-      <Toaster />
+      <SwipeableEdgeDrawer />
     </>
   );
 }
