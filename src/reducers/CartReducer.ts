@@ -1,19 +1,9 @@
-import { TaddToCartAction, TdeleteFromCart, TnewCardInfo } from "../actions";
-import { ADD_TO_CART, REMOVE_ONE_FROM_CART, NEW_CARD_INFO } from "../types";
-import { CardInformation, Product } from "../types/store.types";
+import { TaddToCartAction, TdeleteFromCart, TnewCardInfo, ToggleCartDrawer, TogglePaymentModal } from "../actions";
+import { ADD_TO_CART, REMOVE_ONE_FROM_CART, NEW_CARD_INFO, TOGGLE_CART_DRAWER, TOGGLE_PAYMENT_MODAL } from "../types";
+import { Cart, InitialState, Product } from "../types/store.types";
 import { Reducer } from "redux";
 
-interface Cart extends Product {
-  quantity: number;
-}
-
-type InitialState = {
-  products: Product[];
-  cart: Cart[];
-  cardInformation: CardInformation;
-};
-
-type CartActions = TaddToCartAction | TdeleteFromCart | TnewCardInfo;
+type CartActions = TaddToCartAction | TdeleteFromCart | TnewCardInfo | ToggleCartDrawer | TogglePaymentModal;
 
 const initialState: InitialState = {
   products: [
@@ -32,6 +22,8 @@ const initialState: InitialState = {
     holderName: "",
     securityCode: "",
   },
+  isDrawerCartOpen: false,
+  isModalPaymentOpen: false,
 };
 
 export const cartReducer: Reducer<InitialState, CartActions> = (
@@ -82,6 +74,19 @@ export const cartReducer: Reducer<InitialState, CartActions> = (
       return {
         ...state,
         cardInformation: action.payload
+      }
+    }
+
+    case TOGGLE_CART_DRAWER: {
+      return {
+        ...state,
+        isDrawerCartOpen: action.payload
+      }
+    }
+    case TOGGLE_PAYMENT_MODAL: {
+      return {
+        ...state,
+        isModalPaymentOpen: action.payload
       }
     }
     default:
