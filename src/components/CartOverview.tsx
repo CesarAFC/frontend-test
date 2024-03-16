@@ -7,20 +7,24 @@ import { formatCurrency } from "../utils/utils";
 import fetchMock from "fetch-mock";
 import toast from "react-hot-toast";
 
-fetchMock.post("http://example.com/api/submitPayment", (_, options) => {
-  const paymentData = JSON.parse(options.body as string);
-  const cardInfoResponse = Object.values(paymentData.cardInformation);
-  const isDataCompleted = cardInfoResponse.every((data) => data !== "");
+fetchMock.post(
+  "http://example.com/api/submitPayment",
+  (_, options) => {
+    const paymentData = JSON.parse(options.body as string);
+    const cardInfoResponse = Object.values(paymentData.cardInformation);
+    const isDataCompleted = cardInfoResponse.every((data) => data !== "");
 
-  if (isDataCompleted) {
-    return { status: 200, body: { message: "Payment Completed!" } };
-  } else {
-    return { status: 406, body: { error: "Card Data Incomplete" } };
-  }
-});
+    if (isDataCompleted) {
+      return { status: 200, body: { message: "Payment Completed!" } };
+    } else {
+      return { status: 406, body: { error: "Card Data Incomplete" } };
+    }
+  },
+  { delay: 2000 }
+);
 
 function CartOverview() {
-const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const { cart, cardInformation } = useTypedShoppingSelector();
   const total = useMemo(
     () =>
@@ -30,6 +34,7 @@ const [loading, setLoading] = useState(false)
 
   const handlePayment = async () => {
     try {
+      setLoading(true);
       const response = await fetch("http://example.com/api/submitPayment", {
         method: "POST",
         headers: {
@@ -51,7 +56,9 @@ const [loading, setLoading] = useState(false)
     } catch (error) {
       console.error("Error submitting data:", error);
     }
+    setLoading(false)
   };
+
 
   return (
     <>
@@ -73,7 +80,9 @@ const [loading, setLoading] = useState(false)
         <p className="text-lg font-bold self-end mb-2">
           Total: {formatCurrency(total)}
         </p>
-        <PrimaryButton onClick={handlePayment}>Pay</PrimaryButton>
+        <PrimaryButton loading={loading} onClick={handlePayment}>
+          Pay
+        </PrimaryButton>
       </div>
     </>
   );
