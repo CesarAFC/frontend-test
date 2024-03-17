@@ -9,7 +9,7 @@ type ProductsOverviewProps = {
 export default function ProductsOverview({ product }: ProductsOverviewProps) {
     if (!product) return null;
     return (
-      <section className="max-w-[1300px] mx-auto flex flex-wrap flex-col items-center gap-y-5 p-2 mt-[60px] mb-[80px] overflow-y-auto justify-evenly md:flex-row">
+      <section className="max-w-[1300px] mx-auto flex flex-wrap flex-col items-center gap-y-5 p-2 mt-[60px] mb-[80px] select-none overflow-y-auto justify-evenly md:flex-row">
         <img
           className="w-96 object-contain aspect-square"
           src={product.imageSrc}
