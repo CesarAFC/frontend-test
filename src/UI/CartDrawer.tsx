@@ -1,18 +1,19 @@
 import { Global } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { useDispatch } from "react-redux";
 import { useTypedShoppingSelector } from "../hooks/useTypedSelector";
 import { toggleCartDrawer } from "../actions";
-import CartOverview from "./CartOverview";
+import CartOverview from "../components/CartOverview";
+import FinalStatus from "./FinalStatus";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 const drawerBleeding = 56;
 
-export default function SwipeableEdgeDrawer() {
-  const { isDrawerCartOpen } = useTypedShoppingSelector();
+export default function CartDrawer() {
+  const { isDrawerCartOpen, isPaymentCompleted } = useTypedShoppingSelector();
   const dispatch = useDispatch();
 
   const handleDrawer = (newOpen: boolean) => () => {
@@ -54,8 +55,7 @@ export default function SwipeableEdgeDrawer() {
             Cart
           </Typography>
         </div>
-
-        <CartOverview />
+        {isPaymentCompleted ? <FinalStatus /> : <CartOverview />}
       </SwipeableDrawer>
     </section>
   );
