@@ -1,7 +1,7 @@
 import {
   TaddToCartAction,
   TdeleteFromCart,
-  TnewCardInfo,
+  ThandleForm,
   ToggleCartDrawer,
   TogglePaymentCompleted,
   TogglePaymentModal,
@@ -9,10 +9,10 @@ import {
 import {
   ADD_TO_CART,
   REMOVE_ONE_FROM_CART,
-  NEW_CARD_INFO,
   TOGGLE_CART_DRAWER,
   TOGGLE_PAYMENT_MODAL,
   TOGGLE_PAYMENT_COMPLETED,
+  HANDLE_FORM,
 } from "../types";
 import { Cart, InitialState, Product } from "../types/store.types";
 import { Reducer } from "redux";
@@ -20,10 +20,10 @@ import { Reducer } from "redux";
 type CartActions =
   | TaddToCartAction
   | TdeleteFromCart
-  | TnewCardInfo
   | ToggleCartDrawer
   | TogglePaymentModal
-  | TogglePaymentCompleted;
+  | TogglePaymentCompleted
+  | ThandleForm;
 
 const initialState: InitialState = {
   products: [
@@ -91,12 +91,6 @@ export const cartReducer: Reducer<InitialState, CartActions> = (
             cart: state.cart.filter((item) => item.id !== action.payload),
           };
     }
-    case NEW_CARD_INFO: {
-      return {
-        ...state,
-        cardInformation: action.payload,
-      };
-    }
     case TOGGLE_CART_DRAWER: {
       return {
         ...state,
@@ -120,6 +114,15 @@ export const cartReducer: Reducer<InitialState, CartActions> = (
         return {
           ...state,
           isPaymentCompleted: action.payload,
+        }
+      }
+    }
+    case HANDLE_FORM: {
+      return {
+        ...state,
+        cardInformation: {
+          ...state.cardInformation,
+          [action.payload.name]: action.payload.value,
         }
       }
     }
