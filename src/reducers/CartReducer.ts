@@ -1,18 +1,38 @@
-import { TaddToCartAction, TdeleteFromCart, TnewCardInfo, ToggleCartDrawer, TogglePaymentModal } from "../actions";
-import { ADD_TO_CART, REMOVE_ONE_FROM_CART, NEW_CARD_INFO, TOGGLE_CART_DRAWER, TOGGLE_PAYMENT_MODAL } from "../types";
+import {
+  TaddToCartAction,
+  TdeleteFromCart,
+  TnewCardInfo,
+  ToggleCartDrawer,
+  TogglePaymentCompleted,
+  TogglePaymentModal,
+} from "../actions";
+import {
+  ADD_TO_CART,
+  REMOVE_ONE_FROM_CART,
+  NEW_CARD_INFO,
+  TOGGLE_CART_DRAWER,
+  TOGGLE_PAYMENT_MODAL,
+  TOGGLE_PAYMENT_COMPLETED,
+} from "../types";
 import { Cart, InitialState, Product } from "../types/store.types";
 import { Reducer } from "redux";
 
-type CartActions = TaddToCartAction | TdeleteFromCart | TnewCardInfo | ToggleCartDrawer | TogglePaymentModal;
+type CartActions =
+  | TaddToCartAction
+  | TdeleteFromCart
+  | TnewCardInfo
+  | ToggleCartDrawer
+  | TogglePaymentModal
+  | TogglePaymentCompleted;
 
 const initialState: InitialState = {
   products: [
     {
       id: "1",
-      name: "Product 1",
+      name: "Fjallraven - Foldsack No. 1 Backpack",
       price: 100,
-      description: "Product 1 description lorem ipsum dolor",
-      imageSrc: "https://via.placeholder.com/600/d32776",
+      description: "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+      imageSrc: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
     },
   ],
   cart: [],
@@ -24,6 +44,7 @@ const initialState: InitialState = {
   },
   isDrawerCartOpen: false,
   isModalPaymentOpen: false,
+  isPaymentCompleted: false,
 };
 
 export const cartReducer: Reducer<InitialState, CartActions> = (
@@ -73,20 +94,25 @@ export const cartReducer: Reducer<InitialState, CartActions> = (
     case NEW_CARD_INFO: {
       return {
         ...state,
-        cardInformation: action.payload
-      }
+        cardInformation: action.payload,
+      };
     }
-
     case TOGGLE_CART_DRAWER: {
       return {
         ...state,
-        isDrawerCartOpen: action.payload
-      }
+        isDrawerCartOpen: action.payload,
+      };
     }
     case TOGGLE_PAYMENT_MODAL: {
       return {
         ...state,
-        isModalPaymentOpen: action.payload
+        isModalPaymentOpen: action.payload,
+      };
+    }
+    case TOGGLE_PAYMENT_COMPLETED: {
+      return {
+        ...state,
+        isPaymentCompleted: action.payload,
       }
     }
     default:

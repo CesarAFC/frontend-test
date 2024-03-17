@@ -7,6 +7,7 @@ export type InitialState = {
   cardInformation: CardInformation;
   isDrawerCartOpen: boolean;
   isModalPaymentOpen: boolean;
+  isPaymentCompleted: boolean;
 };
 export type Product = {
   id: string;
