@@ -36,7 +36,7 @@ function CreditCardInput({}: CreditCardInputProps) {
       <div className="flex items-center gap-2 px-2 border border-slate-300 rounded focus-within:outline focus-within:outline-green-300">
         <span>{issuerValidation(card)}</span>
         <input
-          className="p-2 rounded outline-none"
+          className="w-full p-2 rounded outline-none"
           type="text"
           placeholder="Card number"
           required
