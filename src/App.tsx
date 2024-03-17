@@ -1,14 +1,22 @@
-import './App.css'
-import {Provider} from 'react-redux'
-import store from './store'
+import { Provider } from "react-redux";
+import Products from "./UI/Products";
+import { PersistGate } from "redux-persist/integration/react";
+import configureStore from "./store";
+import Navbar from "./components/Navbar";
+
+const { store, persistor } = configureStore();
 
 function App() {
-
   return (
     <Provider store={store}>
-     <h1>Hello World!</h1>
+      <PersistGate loading={null} persistor={persistor}>
+        <section className="bg-white text-zinc-900">
+          <Navbar />
+          <Products />
+        </section>
+      </PersistGate>
     </Provider>
-  )
+  );
 }
 
-export default App
+export default App;
