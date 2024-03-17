@@ -1,10 +1,11 @@
 import { FaCcVisa, FaCcMastercard, FaCcAmex } from "react-icons/fa6";
 import Label from "./Label";
-import { useState } from "react";
-import { CardFormatter, luhnValidation } from "../utils/utils";
+import { CardFormatter } from "../utils/utils";
+import { useDispatch } from "react-redux";
+import { handleForm } from "../actions";
+import { useTypedShoppingSelector } from "../hooks/useTypedSelector";
 
 type CreditCardInputProps = {
-  setIsCardValid: (event: boolean) => void
 };
 
 const IssuerNumbers: Record<string, any> = {
@@ -13,14 +14,16 @@ const IssuerNumbers: Record<string, any> = {
   "5": <FaCcMastercard />,
 };
 
-function CreditCardInput({setIsCardValid}: CreditCardInputProps) {
-  const [cardNumber, setCardNumber] = useState<string>("");
+function CreditCardInput({}: CreditCardInputProps) {
+  const dispatch = useDispatch();
+  const {cardInformation: {card}} = useTypedShoppingSelector()
 
   const handleCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
     const card = event.target.value;
-    setCardNumber(card.trim());
-    const isValidCard = luhnValidation(card.trim())
-    setIsCardValid(isValidCard)
+    dispatch(handleForm({
+      name: 'card',
+      value: card.trim(),
+    }))
   };
 
   const issuerValidation = (card: string) => {
@@ -31,13 +34,13 @@ function CreditCardInput({setIsCardValid}: CreditCardInputProps) {
     <div>
       <Label htmlFor="name">Card number</Label>
       <div className="flex items-center gap-2 px-2 border border-slate-300 rounded focus-within:outline focus-within:outline-green-300">
-        <span>{issuerValidation(cardNumber)}</span>
+        <span>{issuerValidation(card)}</span>
         <input
           className="p-2 rounded outline-none"
           type="text"
           placeholder="Card number"
           required
-          value={CardFormatter(cardNumber)}
+          value={CardFormatter(card)}
           onChange={handleCardNumber}
           name="card"
           minLength={19}
