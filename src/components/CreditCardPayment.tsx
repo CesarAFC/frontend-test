@@ -2,7 +2,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import PrimaryButton from "./PrimaryButton";
 import CreditCardInfo from "./CreditCardInfo";
@@ -10,20 +9,17 @@ import CreditCardInput from "./CreditCardInput";
 import toast from "react-hot-toast";
 import {
   addToCart,
-  newCardInfo,
   toggleCartDrawer,
   togglePaymentModal,
 } from "../actions";
-import { CardInformation } from "../types/store.types";
 import { useTypedShoppingSelector } from "../hooks/useTypedSelector";
 import { CiCreditCard1 } from "react-icons/ci";
+import { luhnValidation } from "../utils/utils";
 
 export default function CreditCardPayment({ id }: { id: string }) {
-  const { isModalPaymentOpen } = useTypedShoppingSelector();
-  const [isCardValid, setIsCardValid] = useState(false);
+  const { isModalPaymentOpen, cardInformation } = useTypedShoppingSelector();
 
   const dispatch = useDispatch();
-  togglePaymentModal;
 
   const handleClickOpen = () => {
     dispatch(togglePaymentModal(true));
@@ -33,19 +29,12 @@ export default function CreditCardPayment({ id }: { id: string }) {
     dispatch(togglePaymentModal(false));
   };
 
-  const handleValidCard = useCallback((event: boolean) => {
-    setIsCardValid(event);
-  }, []);
-
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const formJson = Object.fromEntries(
-      (formData as any).entries()
-    ) as CardInformation;
-    if (isCardValid) {
-      dispatch(newCardInfo(formJson));
+    const isValidCard = luhnValidation(cardInformation.card.trim())
+    if (isValidCard) {
       dispatch(addToCart(id));
+      toast.success('Card added succesfully!')
       dispatch(toggleCartDrawer(true));
       handleClose();
     } else {
@@ -76,7 +65,7 @@ export default function CreditCardPayment({ id }: { id: string }) {
           </p>
         </DialogTitle>
         <DialogContent className="flex flex-col gap-2">
-          <CreditCardInput setIsCardValid={handleValidCard} />
+          <CreditCardInput />
           <CreditCardInfo />
         </DialogContent>
 
