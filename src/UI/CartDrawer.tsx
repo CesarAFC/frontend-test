@@ -7,8 +7,8 @@ import { useTypedShoppingSelector } from "../hooks/useTypedSelector";
 import { toggleCartDrawer } from "../actions";
 import CartOverview from "../components/CartOverview";
 import FinalStatus from "./FinalStatus";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import { FaShoppingCart } from "react-icons/fa";
+import PrimaryButton from "../components/PrimaryButton";
 
 const drawerBleeding = 56;
 
@@ -31,9 +31,9 @@ export default function CartDrawer() {
           },
         }}
       />
-      <Box sx={{ textAlign: "center", pt: 1 }}>
-        <Button onClick={handleDrawer(true)}>Open</Button>
-      </Box>
+      <PrimaryButton onClick={handleDrawer(true)}>
+        <FaShoppingCart />
+      </PrimaryButton>
       <SwipeableDrawer
         style={{ position: "relative" }}
         anchor="bottom"
