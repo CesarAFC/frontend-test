@@ -13,6 +13,7 @@ import {
   TOGGLE_PAYMENT_MODAL,
   TOGGLE_PAYMENT_COMPLETED,
   HANDLE_FORM,
+  CLEAR_CART,
 } from "../types";
 import { Cart, InitialState, Product } from "../types/store.types";
 import { Reducer } from "redux";
@@ -23,7 +24,8 @@ type CartActions =
   | ToggleCartDrawer
   | TogglePaymentModal
   | TogglePaymentCompleted
-  | ThandleForm;
+  | ThandleForm
+  | { type: typeof CLEAR_CART };
 
 const initialState: InitialState = {
   products: [
@@ -31,7 +33,8 @@ const initialState: InitialState = {
       id: "1",
       name: "Fjallraven - Foldsack No. 1 Backpack",
       price: 100,
-      description: "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+      description:
+        "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
       imageSrc: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
     },
   ],
@@ -104,18 +107,10 @@ export const cartReducer: Reducer<InitialState, CartActions> = (
       };
     }
     case TOGGLE_PAYMENT_COMPLETED: {
-      if(action.payload === false ) {
-        return {
-          ...state,
-          isPaymentCompleted: action.payload,
-          cart: []
-        }
-      } else {
-        return {
-          ...state,
-          isPaymentCompleted: action.payload,
-        }
-      }
+      return {
+        ...state,
+        isPaymentCompleted: action.payload,
+      };
     }
     case HANDLE_FORM: {
       return {
@@ -123,8 +118,14 @@ export const cartReducer: Reducer<InitialState, CartActions> = (
         cardInformation: {
           ...state.cardInformation,
           [action.payload.name]: action.payload.value,
-        }
-      }
+        },
+      };
+    }
+    case CLEAR_CART: {
+      return {
+        ...state,
+        cart: [],
+      };
     }
     default:
       return state;

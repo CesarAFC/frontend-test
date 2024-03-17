@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import {
   addToCart,
   toggleCartDrawer,
+  togglePaymentCompleted,
   togglePaymentModal,
 } from "../actions";
 import { useTypedShoppingSelector } from "../hooks/useTypedSelector";
@@ -33,6 +34,7 @@ export default function CreditCardPayment({ id }: { id: string }) {
     event.preventDefault();
     const isValidCard = luhnValidation(cardInformation.card.trim())
     if (isValidCard) {
+      dispatch(togglePaymentCompleted(false));
       dispatch(addToCart(id));
       toast.success('Card added succesfully!')
       dispatch(toggleCartDrawer(true));
@@ -57,6 +59,7 @@ export default function CreditCardPayment({ id }: { id: string }) {
           component: "form",
           onSubmit: handleFormSubmit,
         }}
+        onKeyDown={e => e.key === 'Enter' ? e.preventDefault() : null}
       >
         <DialogTitle>
           <span className="font-bold">Credit Card Payment</span>

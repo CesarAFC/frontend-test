@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { toggleCartDrawer, togglePaymentCompleted } from "../actions";
+import { clearCart, toggleCartDrawer, togglePaymentCompleted } from "../actions";
 import PrimaryButton from "../components/PrimaryButton";
 import { useTypedShoppingSelector } from "../hooks/useTypedSelector";
 import { useMemo } from "react";
@@ -15,6 +15,7 @@ function FinalStatus({}) {
 
   const handleNextPayment = () => {
     dispatch(togglePaymentCompleted(false));
+    dispatch(clearCart());
     dispatch(toggleCartDrawer(false));
   };
   return (
@@ -29,7 +30,7 @@ function FinalStatus({}) {
         </div>
         <div className="flex justify-between">
           <p className="text-neutral-500">Card</p>
-          <p>{`**** **** **** ${cardInformation.card.substring(12)}`}</p>
+          <p>{`**** **** **** ${cardInformation.card.substring(15)}`}</p>
         </div>
         <div className="flex justify-between">
           <p className="text-neutral-500">Product</p>
