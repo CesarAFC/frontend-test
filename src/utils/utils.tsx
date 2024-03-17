@@ -19,11 +19,10 @@ export function CardFormatter(value: string): string {
  * @returns Boolean if card is valid or not
  */
 export function luhnValidation(card: string): boolean {
-  if (!/^\d+$/.test(card)) {
+  if (/^[a-zA-Z]+$/.test(card)) {
     return false;
   }
   const cardNumberNoSpaces = card.replace(/\D/g, "");
-  console.log("### ~ cardNumberNoSpaces:", cardNumberNoSpaces);
   const digits = cardNumberNoSpaces.split("").map(Number);
   if (card.length < 13 || card.length > 19) {
     return false;
