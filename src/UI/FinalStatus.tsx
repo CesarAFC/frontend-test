@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { togglePaymentCompleted } from "../actions";
+import { toggleCartDrawer, togglePaymentCompleted } from "../actions";
 import PrimaryButton from "../components/PrimaryButton";
 import { useTypedShoppingSelector } from "../hooks/useTypedSelector";
 import { useMemo } from "react";
@@ -17,6 +17,7 @@ function FinalStatus({}: FinalStatusProps) {
 
   const handleNextPayment = () => {
     dispatch(togglePaymentCompleted(false));
+    dispatch(toggleCartDrawer(false));
   };
   return (
     <>
