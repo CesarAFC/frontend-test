@@ -9,9 +9,7 @@ const persistConfig = {
     whitelist: ['shopping'],
   }
 
-  const persistedReducer = persistReducer(persistConfig, reducer)
-
-// const store = createStore(reducer);
+  const persistedReducer = persistReducer(persistConfig, reducer as any)
 
 export default () => {
     let store = createStore(persistedReducer)
