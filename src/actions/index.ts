@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_ONE_FROM_CART, TOGGLE_CART_DRAWER, TOGGLE_PAYMENT_MODAL, TOGGLE_PAYMENT_COMPLETED, HANDLE_FORM } from "../types";
+import { ADD_TO_CART, REMOVE_ONE_FROM_CART, TOGGLE_CART_DRAWER, TOGGLE_PAYMENT_MODAL, TOGGLE_PAYMENT_COMPLETED, HANDLE_FORM, CLEAR_CART } from "../types";
 import { CardInformation } from "../types/store.types";
 
 export type TaddToCartAction = {
@@ -41,3 +41,5 @@ export type ThandleForm = {
     payload: formChange
 }
 export const handleForm = (value: formChange): ThandleForm => ({type: HANDLE_FORM, payload: value})
+
+export const clearCart = () => ({type: CLEAR_CART})
