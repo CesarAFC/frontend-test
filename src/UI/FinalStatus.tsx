@@ -20,7 +20,7 @@ function FinalStatus({}: FinalStatusProps) {
   };
   return (
     <>
-      <section className="px-4 pt-1 pb-1 overflow-auto h-full text-sm">
+      <section className="px-4 pt-1 pb-1 overflow-auto h-full text-sm lg:mx-auto lg:w-[1000px]">
         <div className="flex flex-col justify-center items-center text-center border-b border-b-gray-200 pb-4 my-4">
             <IconContext.Provider value={{size: '2em', color: '#23A26D'}}>
           <IoMdCheckmarkCircleOutline />
