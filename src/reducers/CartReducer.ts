@@ -110,9 +110,18 @@ export const cartReducer: Reducer<InitialState, CartActions> = (
       };
     }
     case TOGGLE_PAYMENT_COMPLETED: {
-      return {
-        ...state,
-        isPaymentCompleted: action.payload,
+      console.log(action.payload)
+      if(action.payload === false ) {
+        return {
+          ...state,
+          isPaymentCompleted: action.payload,
+          cart: []
+        }
+      } else {
+        return {
+          ...state,
+          isPaymentCompleted: action.payload,
+        }
       }
     }
     default:
