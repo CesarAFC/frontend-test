@@ -59,12 +59,12 @@ function CartOverview() {
     setLoading(false);
   };
 
-  if(cart.length === 0) return <EmptyState />
+  if (cart.length === 0) return <EmptyState />;
   return (
     <>
       <section className="px-1 pb-1 overflow-auto h-full">
         {cart.length === 0 && <EmptyState />}
-        <div className="flex flex-col gap-2 shadow-inner">
+        <div className="mx-auto max-w-[1000px] flex flex-col gap-2 shadow-inner">
           {cart.map((product) => (
             <ProductCard
               key={product.id}
