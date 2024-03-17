@@ -8,7 +8,7 @@ function PrimaryButton({ children, loading, ...props }: Props) {
   return (
     <button
       {...props}
-      className="w-full flex justify-center items-center gap-2 bg-indigo-700 text-white hover:bg-indigo-500 transition ease-in-out px-3 py-2 rounded"
+      className="w-full flex justify-center items-center gap-2 bg-green-300 text-zinc-900 font-bold hover:bg-green-500 transition ease-in-out px-3 py-2 rounded"
     >
       {loading ? (
         <span className="animate-spin">
