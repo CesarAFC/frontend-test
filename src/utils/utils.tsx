@@ -48,3 +48,9 @@ export function formatCurrency(amount: string | number): string | undefined {
   });
   return currencyCol;
 }
+
+
+export function getCartTotal(arr: any[]) {
+  if(!arr || arr.length === 0) return arr 
+  return arr.reduce((acc, current) => acc + current.price * current.quantity, 0)
+}
