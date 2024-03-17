@@ -29,7 +29,7 @@ function CreditCardInfo() {
           <Input
             name="expirationDate"
             type="text"
-            placeholder="mm/yy"
+            placeholder="mm/yyyy"
             value={expirationDateFormat(cardInformation.expirationDate)}
             onChange={handleChange}
             minLength={7}
