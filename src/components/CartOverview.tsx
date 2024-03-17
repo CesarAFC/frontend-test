@@ -1,11 +1,13 @@
 import { useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useTypedShoppingSelector } from "../hooks/useTypedSelector";
 import EmptyState from "./EmptyState";
 import PrimaryButton from "./PrimaryButton";
 import ProductCard from "./ProductInCart";
-import { formatCurrency } from "../utils/utils";
+import { formatCurrency, getCartTotal } from "../utils/utils";
 import fetchMock from "fetch-mock";
 import toast from "react-hot-toast";
+import { togglePaymentCompleted } from "../actions";
 
 fetchMock.post(
   "http://example.com/api/submitPayment",
@@ -24,13 +26,10 @@ fetchMock.post(
 );
 
 function CartOverview() {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { cart, cardInformation } = useTypedShoppingSelector();
-  const total = useMemo(
-    () =>
-      cart.reduce((acc, current) => acc + current.price * current.quantity, 0),
-    [cart]
-  );
+  const total = useMemo(() => getCartTotal(cart), [cart]);
 
   const handlePayment = async () => {
     try {
@@ -49,17 +48,18 @@ function CartOverview() {
       const responseData = await response.json();
 
       if (response.ok) {
-        console.log(responseData);
+        dispatch(togglePaymentCompleted(true));
+        toast.success(responseData?.message);
       } else {
         toast.error("Card Data must be complete!");
       }
     } catch (error) {
       console.error("Error submitting data:", error);
     }
-    setLoading(false)
+    setLoading(false);
   };
 
-
+  if(cart.length === 0) return <EmptyState />
   return (
     <>
       <section className="px-1 pb-1 overflow-auto h-full">
