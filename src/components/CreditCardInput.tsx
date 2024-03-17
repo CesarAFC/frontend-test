@@ -30,7 +30,7 @@ function CreditCardInput({setIsCardValid}: CreditCardInputProps) {
   return (
     <div>
       <Label htmlFor="name">Card number</Label>
-      <div className="flex items-center gap-2 px-2 border border-slate-300 rounded focus-within:outline focus-within:outline-slate-500">
+      <div className="flex items-center gap-2 px-2 border border-slate-300 rounded focus-within:outline focus-within:outline-green-300">
         <span>{issuerValidation(cardNumber)}</span>
         <input
           className="p-2 rounded outline-none"
