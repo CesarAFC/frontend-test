@@ -40,6 +40,7 @@ function CreditCardInfo() {
           <Label htmlFor="amount">Security Code</Label>
           <Input
             name="securityCode"
+            minLength={3}
             maxLength={3}
             type="text"
             placeholder="Security Code"
