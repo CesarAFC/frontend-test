@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_ONE_FROM_CART, NEW_CARD_INFO, TOGGLE_CART_DRAWER, TOGGLE_PAYMENT_MODAL } from "../types";
+import { ADD_TO_CART, REMOVE_ONE_FROM_CART, NEW_CARD_INFO, TOGGLE_CART_DRAWER, TOGGLE_PAYMENT_MODAL, TOGGLE_PAYMENT_COMPLETED } from "../types";
 import { CardInformation } from "../types/store.types";
 
 export type TaddToCartAction = {
@@ -31,3 +31,9 @@ export type TogglePaymentModal = {
     payload: boolean
 }
 export const togglePaymentModal = (status: boolean): TogglePaymentModal => ({type: TOGGLE_PAYMENT_MODAL, payload: status});
+
+export type TogglePaymentCompleted = {
+    type: typeof TOGGLE_PAYMENT_COMPLETED,
+    payload: boolean
+}
+export const togglePaymentCompleted = (status: boolean): TogglePaymentCompleted => ({type: TOGGLE_PAYMENT_COMPLETED, payload: status});
