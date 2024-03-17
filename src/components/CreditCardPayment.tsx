@@ -1,7 +1,5 @@
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useCallback, useState } from "react";
@@ -17,7 +15,6 @@ import {
   togglePaymentModal,
 } from "../actions";
 import { CardInformation } from "../types/store.types";
-import SwipeableEdgeDrawer from "./CartDrawer";
 import { useTypedShoppingSelector } from "../hooks/useTypedSelector";
 import { CiCreditCard1 } from "react-icons/ci";
 
@@ -57,10 +54,12 @@ export default function CreditCardPayment({ id }: { id: string }) {
   };
   return (
     <>
+    <div className="md:w-[250px]">
       <PrimaryButton onClick={handleClickOpen}>
         <CiCreditCard1 />
         <span>Pay with credit card</span>
       </PrimaryButton>
+    </div>
       <Dialog
         fullWidth
         open={isModalPaymentOpen}
@@ -70,21 +69,34 @@ export default function CreditCardPayment({ id }: { id: string }) {
           onSubmit: handleFormSubmit,
         }}
       >
-        <DialogTitle>Credit Card Payment</DialogTitle>
-        <DialogContent className="flex flex-col gap-2">
-          <DialogContentText>
+        <DialogTitle>
+          <span className="font-bold">Credit Card Payment</span>
+          <p className="text-xs text-neutral-500">
             All transactions are secured and encrypted
-          </DialogContentText>
+          </p>
+        </DialogTitle>
+        <DialogContent className="flex flex-col gap-2">
           <CreditCardInput setIsCardValid={handleValidCard} />
           <CreditCardInfo />
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Add</Button>
+          <div className="px-3 py-2">
+          <button
+            className="px-2 py-1 text-sm text-green-500 rounded uppercase hover:bg-green-50 transition ease-in-out"
+            onClick={handleClose}
+          >
+            Cancel
+          </button>
+          <button
+            className="px-2 py-1 text-sm border text-green-500 border-green-300 rounded uppercase hover:bg-green-50 transition ease-in-out"
+            type="submit"
+          >
+            Add
+          </button>
+          </div>
         </DialogActions>
       </Dialog>
-      <SwipeableEdgeDrawer />
     </>
   );
 }
