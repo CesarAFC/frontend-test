@@ -17,7 +17,7 @@ export default function ProductsOverview({ product }: ProductsOverviewProps) {
         />
         <div className="flex-[0_0_48%] flex flex-col gap-3">
           <h3 className="uppercase font-bold">{product.name}</h3>
-          <p className="text-neutral-400">{product.description}</p>
+          <p className="max-w-[500px] text-neutral-400">{product.description}</p>
           <p className="font-bold">{formatCurrency(product.price)}</p>
           <CreditCardPayment id={product.id} />
         </div>

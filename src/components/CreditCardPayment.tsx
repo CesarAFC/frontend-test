@@ -81,7 +81,7 @@ export default function CreditCardPayment({ id }: { id: string }) {
         </DialogContent>
 
         <DialogActions>
-          <div className="px-3 py-2">
+          <div className="px-3 py-2 flex gap-2">
           <button
             className="px-2 py-1 text-sm text-green-500 rounded uppercase hover:bg-green-50 transition ease-in-out"
             onClick={handleClose}
