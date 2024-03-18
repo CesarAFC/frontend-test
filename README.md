@@ -115,4 +115,3 @@ Test Suites: 14 passed, 14 total
 Tests:       22 passed, 22 total
 Snapshots:   0 total
 Time:        2.695 s
->>>>>>> Stashed changes
