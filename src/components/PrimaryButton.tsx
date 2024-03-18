@@ -12,7 +12,7 @@ function PrimaryButton({ children, loading, ...props }: Props) {
     >
       {loading ? (
         <span className="animate-spin">
-          <AiOutlineLoading />
+          <AiOutlineLoading aria-label="loading-icon" />
         </span>
       ) : null}
       {children}

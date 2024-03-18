@@ -8,7 +8,7 @@ function DeleteFromCartButton({ ...props }: Props) {
       {...props}
       className="self-end flex justify-center items-center gap-2 text-neutral-400 hover:bg-neutral-200 transition ease-in-out px-3 py-2 rounded"
     >
-      <MdDeleteForever />
+      <MdDeleteForever aria-label="delete-icon" />
     </button>
   );
 }
