@@ -62,4 +62,57 @@ pnpm run test
 ```
 <img width="630" alt="Screenshot 2024-03-18 at 9 28 47 AM" src="https://github.com/CesarAFC/frontend-test/assets/93958252/f684fd0e-ee5c-474b-b1b8-86ba1469dc65">
 
+### Tests runs
 
+> jest --watchAll=false --coverage --CI=true
+
+ PASS  src/__test__/utils/expirationDateFormat.test.ts
+ PASS  src/__test__/CartReducer.test.ts
+ PASS  src/__test__/PrimaryButton.test.tsx
+ PASS  src/__test__/Input.test.tsx
+ PASS  src/__test__/ProductInCart.test.tsx
+ PASS  src/__test__/DeleteFromCartButton.test.tsx
+ PASS  src/__test__/utils/formatCurrency.test.ts
+ PASS  src/__test__/App.test.tsx
+ PASS  src/__test__/utils/luhnvalidation.test.ts
+ PASS  src/__test__/utils/CardFormatter.test.ts
+ PASS  src/__test__/utils/getCartTotal.test.ts
+ PASS  src/__test__/CreditCardInput.test.tsx
+ PASS  src/__test__/EmptyState.test.tsx
+ PASS  src/__test__/Navbar.test.tsx
+
+File                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------|---------|----------|---------|---------|-------------------
+All files                  |    72.9 |    68.96 |    61.7 |   75.55 |                   
+ UI                        |   35.29 |       50 |   33.33 |   33.33 |                   
+  CartDrawer.tsx           |   85.71 |       50 |   66.66 |   83.33 | 20                
+  FinalStatus.tsx          |       0 |      100 |       0 |       0 | 11-21             
+ actions                   |   57.14 |      100 |   14.28 |     100 |                   
+  index.ts                 |   57.14 |      100 |   14.28 |     100 |                   
+ components                |   58.33 |    46.15 |   70.58 |   57.77 |                   
+  CartOverview.tsx         |   32.14 |     12.5 |   33.33 |      28 | 15-22,35-59,63-69 
+  CreditCardInput.tsx      |     100 |      100 |     100 |     100 |                   
+  DeleteFromCartButton.tsx |     100 |      100 |     100 |     100 |                   
+  EmptyState.tsx           |     100 |      100 |     100 |     100 |                   
+  Input.tsx                |     100 |      100 |     100 |     100 |                   
+  Label.tsx                |     100 |      100 |     100 |     100 |                   
+  Navbar.tsx               |     100 |      100 |     100 |     100 |                   
+  PrimaryButton.tsx        |     100 |      100 |     100 |     100 |                   
+  ProductInCart.tsx        |      75 |      100 |      50 |      75 | 22                
+ hooks                     |     100 |      100 |     100 |     100 |                   
+  useTypedSelector.tsx     |     100 |      100 |     100 |     100 |                   
+ reducers                  |   80.95 |     64.7 |   57.14 |      85 |                   
+  CartReducer.ts           |      80 |     64.7 |   57.14 |   84.21 | 68,94,125         
+  index.ts                 |     100 |      100 |     100 |     100 |                   
+ store                     |     100 |      100 |     100 |     100 |                   
+  index.ts                 |     100 |      100 |     100 |     100 |                   
+ types                     |     100 |      100 |     100 |     100 |                   
+  index.ts                 |     100 |      100 |     100 |     100 |                   
+ utils                     |    97.5 |    84.61 |     100 |   97.05 |                   
+  utils.tsx                |    97.5 |    84.61 |     100 |   97.05 | 33        
+
+Test Suites: 14 passed, 14 total
+Tests:       22 passed, 22 total
+Snapshots:   0 total
+Time:        2.695 s
+>>>>>>> Stashed changes
