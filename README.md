@@ -27,7 +27,7 @@ The app allows users to make payments using a credit card. It validates whether 
 -  **Fetch-Mock**
 -  **Jest**
 -  **Testing Library**
-- 
+
 ## Installation  
 1. Clone the repository:
 ```  
