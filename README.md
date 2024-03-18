@@ -60,3 +60,6 @@ pnpm run build
 ```
 pnpm run test
 ```
+<img width="630" alt="Screenshot 2024-03-18 at 9 28 47 AM" src="https://github.com/CesarAFC/frontend-test/assets/93958252/f684fd0e-ee5c-474b-b1b8-86ba1469dc65">
+
+
