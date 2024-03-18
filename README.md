@@ -6,7 +6,7 @@ This is a payment application built using React and TypeScript, with Vite fronte
 
 Payment App is fully responsive and is focus on mobile first and images maintain the aspect ratio. UX Design was created under own consideration and criteria using a light theme with white, black and green as a palette colors. User can recover the progress made in case of refresh and works across Chrome, Safari and Mozilla. 
 
-Finally the app is hosted (Temporary) in AWS S3 and CloudFront. [Live Demo](https://d1asmyu5mr5ep9.cloudfront.net). Cache is disabled to see changes instantly 
+Finally the app is hosted (Temporary) in AWS S3 and CloudFront. <a href="https://d1asmyu5mr5ep9.cloudfront.net" target="_blank">Live Demo</a>. Cache is disabled to see changes instantly 
 
 ## Overview
 
