@@ -12,7 +12,12 @@ Finally the app is hosted (Temporary) in AWS S3 and CloudFront. <a href="https:/
 
 The app allows users to make payments using a credit card. It validates whether the entered card details are valid or not using the luhn algorithm, and checking the issuer of the card as well. Users can add the product to their cart and proceed to pay. Upon payment completion, the app provides a summary of the transaction.
 
-
+### Example Credit Cards Numbers
+| Credit Card Type | Credit Card Number |
+| :---             | :----:             |
+| American Express | 371449635398431    | 
+| MasterCard       | 5555555555554444   | 
+| Visa             | 4111111111111111   | 
 
 ## Features
 
