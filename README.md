@@ -30,34 +30,34 @@ The app allows users to make payments using a credit card. It validates whether 
 
 ## Installation  
 1. Clone the repository:
-```  
+```bash  
 git clone https://github.com/CesarAFC/frontend-test.git
 ```
 2. Navigate into the project directory:
-```
+```bash
 cd test-frontend
 ```
 3. Install dependencies:
 
-```
+```bash
 pnpm install
 ```
 
 ## Usage
 
 - **Development Mode:** Run the development server:
-```
+```bash
 pnpm run dev
 ```
 This will start the development server. Open [http://localhost:5173/](http://localhost:5173) to view it in the browser.
 
 - **Production Build:** Build the app for production:
-```
+```bash
 pnpm run build
 ```
 
 - **Testing:** Run tests using Jest:
-```
+```bash
 pnpm run test
 ```
 <img width="630" alt="Screenshot 2024-03-18 at 9 28 47 AM" src="https://github.com/CesarAFC/frontend-test/assets/93958252/f684fd0e-ee5c-474b-b1b8-86ba1469dc65">
